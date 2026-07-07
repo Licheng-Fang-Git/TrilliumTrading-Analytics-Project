@@ -1,0 +1,31 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+<div class="flex justify-center items-center py-20">
+    <div class="bg-white rounded-2xl shadow-lg p-10 max-w-md w-full text-center">
+        <div class="flex justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-14 h-14" fill="#0A66C2">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.114 20.452H3.558V9h3.556v11.452z"/>
+            </svg>
+        </div>
+
+        {% if process == "connect" %}
+            <h1 class="text-2xl font-semibold text-gray-800 mb-3">Connect {{ provider.name }}</h1>
+            <p class="text-gray-500 mb-8">You are about to connect a new third-party account from {{ provider.name }}.</p>
+        {% else %}
+            <h1 class="text-2xl font-semibold text-gray-800 mb-3">Sign in with LinkedIn</h1>
+            <p class="text-gray-500 mb-8">You'll be redirected to LinkedIn to securely confirm your identity.</p>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="w-full px-6 py-3 text-lg font-semibold bg-[#0A66C2] text-white rounded-xl hover:bg-[#004182] transition">
+                {% trans "Continue" %}
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
